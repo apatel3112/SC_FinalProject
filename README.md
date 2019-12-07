@@ -18,3 +18,4 @@ _Specific Search_
 
 The user can also tailor their search based on a number of parameters such as media format (tv/movie), genre, movie period, imdb rating, actor, director, runtime and title.
 
+Note - Only movies up to 2009 are included in the database
