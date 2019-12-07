@@ -391,15 +391,8 @@ class PageFive(tk.Frame):
 
     def show_entry(self):
         self.movies.append(self.t.get())        
-        size = 120, 120
-        file_name = self.t.get() + ".jpg"
-        image = Image.open(file_name)
-        image.thumbnail(size)
 
-        self.photo.append(ImageTk.PhotoImage(image))
-
-        im = tk.Button(self, text=self.t.get(), image=self.photo[-1], bg="white",
-                       borderwidth=0, compound=tk.TOP)
+        im = tk.Message(self, text=self.t.get(), bg="white", font=8)
         im.pack(side=tk.LEFT, padx=10)
 
         self.t.delete(0, tk.END)
