@@ -1,4 +1,11 @@
+
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+"""
+Created on Fri Dec  6 15:48:09 2019
+
+@author: Anusha
+"""
 """
 Created on Mon Dec  2 16:38:47 2019
 This file creates a GUI application that allows for user input of movie
@@ -632,10 +639,8 @@ def GUI_Movie():
 if __name__ == "__main__":
     movie_input = GUI_Movie()
     print(movie_input)
+    
+    
 
 
 # references: https://stackoverflow.com/questions/7546050/switch-between-two-frames-in-tkinter
-
-
-
-
