@@ -15,5 +15,6 @@ _KNN Clustering_
 KNN Clustering was performed using the sklearn module on Python. The movie title, genre, imdb rating and imdb votes were preprocessed, scaled and converted to a matrix. KNN clustering was then performed on this matrix to yield the top 10 most similar movies given a certain movie input.
 
 _Specific Search_
+
 The user can also tailor their search based on a number of parameters such as media format (tv/movie), genre, movie period, imdb rating, actor, director, runtime and title.
 
