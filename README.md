@@ -1,6 +1,6 @@
 What to Watch?
 
-This project is movie and TV recommendation application. It uses a Graphical User Interface (GUI) to take in movie and TV sorting parameters. The input user information is used in either k nearest neighboring algorithm or sorting algorithm to that generate the top ten suggested movies for the user
+This project is a movie and TV recommendation application. It uses a Graphical User Interface (GUI) to take in movie and TV sorting parameters. The input user information is used in either k nearest neighboring algorithm or sorting algorithm to that generate the top ten suggested movies for the user
 
 _GUI_
 
