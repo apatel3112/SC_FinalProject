@@ -323,7 +323,7 @@ def outputs():
 
     # Extract max and min rating
     gui_output_6 = np.array(gui_output[6])
-    if np.nonzero(gui_output_6) == 0:
+    if np.count_nonzero(gui_output_6) > 0:
         rating_min = gui_output_6[0]
         rating_max = gui_output_6[1]
     else:
@@ -332,7 +332,7 @@ def outputs():
 
     # Extract time limit
     gui_output_7 = np.array(gui_output[7])
-    if np.nonzero(gui_output_7) >= 1:
+    if np.count_nonzero(gui_output_7) > 0:
         time = gui_output_7
         time_indices = [time_scale[i] for (i, x) in enumerate(time)
                         if x == 1]
