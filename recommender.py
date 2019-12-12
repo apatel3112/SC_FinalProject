@@ -30,7 +30,7 @@ def movies_df_gen(file):
     # convert excel file to dataframe
 
     parent_df = pd.read_csv(file, sep=',',
-                            encoding='ISO-8859-1')
+                            encoding='ISO-8859-1',error_bad_lines=False)
 
     # remove extra columns
     # extra columns found on inspection
@@ -322,16 +322,18 @@ def outputs():
     director = gui_output[4]
 
     # Extract max and min rating
-    if len(gui_output[6]) == 2:
-        rating_min = gui_output[6][0]
-        rating_max = gui_output[6][1]
+    gui_output_6 = np.array(gui_output[6])
+    if np.nonzero(gui_output_6) == 0:
+        rating_min = gui_output_6[0]
+        rating_max = gui_output_6[1]
     else:
         rating_min = 1
         rating_max = 10
 
     # Extract time limit
-    if len(gui_output[7]) >= 1:
-        time = gui_output[7]
+    gui_output_7 = np.array(gui_output[7])
+    if np.nonzero(gui_output_7) >= 1:
+        time = gui_output_7
         time_indices = [time_scale[i] for (i, x) in enumerate(time)
                         if x == 1]
     else:
