@@ -147,7 +147,6 @@ def data_set(movies_df, genre_indices, actor, director, start_year, end_year,
             movies_df = movies_df[movies_df['genre'].str.contains(to_keep[i])]
 
     # Format year times to yield only numeric values
-
     movies_df = movies_df.reset_index()
     movies_df['year'] = movies_df['year'].astype(str)
     movies_df['year'] = movies_df['year'].str.slice(start=0, stop=4, step=1)
@@ -212,6 +211,7 @@ def knn_algorithm(movies_df):
                             movies_df['imdb_rating'],
                             movies_df['imdb_votes']], axis=1)
 
+    print('SIZE',knn_matrix.size)
     # Scale values to avoid letting large values dominate results
 
     min_max_scaler = MinMaxScaler()
@@ -291,11 +291,12 @@ def outputs():
     time_scale = [60, 120, 180, 1000]
 
     # Extract media types
-    if len(gui_output[0]) == 1:
-        media_type = gui_output[0]
+    media_type = gui_output[0]
+
+    try:    
         media_indices = [media[i] for (i, x) in enumerate(media_type) if x
-                         == 1]
-    else:
+                     == 1]
+    except IndexError:
         media_indices = ['movie']
 
     # Extract genre types
@@ -329,15 +330,28 @@ def outputs():
         rating_max = 10
 
     # Extract time limit
-    if len(gui_output[7]) == 1:
+    if len(gui_output[7]) >= 1:
         time = gui_output[7]
         time_indices = [time_scale[i] for (i, x) in enumerate(time)
-                        if x == 1][0]
+                        if x == 1]
     else:
-        time_indices = [90]
+        time_indices = [180]
 
     # all_tv_names = list(movies_df.title.values)
 
+    print(
+        media_indices,
+        genre_indices,
+        year_max,
+        year_min,
+        movie_name,
+        actor,
+        director,
+        rating_max,
+        rating_min,
+        time_indices,
+        )
+    
     return (
         media_indices,
         genre_indices,
@@ -392,7 +406,7 @@ def print_similar_shows(name, indices, movies_df):
     found_id = get_index_of_movie(name, movies_df)
     if found_id is not None:
         for id in (indices[found_id])[1:]:
-            output.append(movies_df.ix[id])
+            output.append(movies_df.ix[id]['title'])
             print(movies_df.ix[id]['title'])
 
     return output
@@ -460,7 +474,7 @@ def knn_random_search(movies_df, tv_df, media_indices, genre_indices, year_max,
         suggestions = chosen_df.tail(10)
         shows = suggestions.title
 
-    return shows
+    return shows, chosen_df
 
 def output_rec(shows):
     """
@@ -473,10 +487,10 @@ def output_rec(shows):
         output page
 
     """
-    shows_list = []
-
+    shows_list = [] 
+    
     for i in range(len(shows)):
-        shows_list.append(shows.iloc[i])
+        shows_list.append(shows[i])
 
     output = tk.Tk(className="Recommendations")
     output.geometry("800x800")
@@ -512,7 +526,7 @@ if __name__ == '__main__':
         time_indices,
         ) = outputs()
 
-    shows = knn_random_search(
+    shows, chosen_df = knn_random_search(
         movies_df,
         tv_df,
         media_indices,
